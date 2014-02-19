@@ -1,16 +1,15 @@
-def pop
-  counter = 0
-  for counter in 1..100
-    if counter % 15 == 0
-      puts "FizzBuzz"
-    elsif counter % 3 == 0
-      puts "Fizz"
-    elsif counter % 5 == 0
-      puts "Buzz"
-    else
-      puts counter
-    end
+def pop(counter)
+  tres = counter % 3 == 0
+  cinco = counter % 5 == 0
+  tres_y_cinco = tres && cinco
+
+  if tres_y_cinco
+    puts "FizzBuzz"
+  elsif tres
+    puts "Fizz"
+  elsif cinco
+    puts "Buzz"
+  else
+    puts counter
   end
 end
-
-pop
