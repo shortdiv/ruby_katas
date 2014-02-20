@@ -1,73 +1,26 @@
-#convert a number into words
+Singles = ["", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine ", "ten ", "eleven ", "twelve ", "thirteen ", "fourteen ", "fifteen ", "sixteen ", "seventeen ", "eighteen ", "nineteen "]
+Doubles = ["", "", "twenty ", "thirty ", "forty ", "fifty ", "sixty ", "seventy ", "eighty ", "ninety "]
 
-SINGLE ={
-1 => "One ",
-2 => "Two ",
-3 => "Three ",
-4 => "Four ",
-5 => "Five ",
-6 => "Six ",
-7 => "Seven ",
-8 => "Eight ",
-9 => "Nine "
-}
-
-TEEN ={
-0 => "Ten",
-1 => "Eleven",
-2 => "Twelve",
-3 => "Thirteen ",
-4 => "Fourteen ",
-5 => "Fifteen ",
-6 => "Sixteen ",
-7 => "Seventeen ",
-8 => "Eighteen ",
-9 => "Nineteen "
-}
-
-DOUBLE ={
-2 => "Twenty ",
-3 => "Thirty ",
-4 => "Forty ",
-5 => "Fifty ",
-6 => "Sixty ",
-7 => "Seventy ",
-8 => "Eighty ",
-9 => "Ninety "
-}
-
-def name(num, value, word)
-  if num > value
-    whole = num/value
-    print SINGLE[whole] + "#{word}"
-    num -= (whole * value)
+def wordify(num, value, word, list)
+  if num >= value
+      # Teens Case
+      if num < 19 && num > 9
+        print Singles[num]
+      else
+        whole = num/value
+        print list[whole] + "#{word}"
+        num -= (whole * value)
+      end
   end
-  num #returns num if false
+  num #return no
 end
 
-def doubles(num)
-  if num > 10
-    whole = num/10
-    remainder = num % 10
-    if whole > 1
-      print DOUBLE[whole]
-      num -= (whole * 10)
-    elsif whole == 1
-      print TEEN[remainder]
-      num -= num
-    end
+def whole_word(num)
+  if num == 0
+    return "zero"
   end
-  #returns num if false
+  num = wordify(num, 1000, "thousand ", Singles)
+  num = wordify(num, 100, "hundred ", Singles)
+  num = wordify(num, 10, "", Doubles)
+  num = Singles[num]
 end
-
-def wordify(num)
-  num = name(num, 1000, "Thousand ")
-  num = name(num, 100, "Hundred ")
-  num = doubles(num)
-  num = SINGLE[num]
-  puts num
-end
-
-wordify(9909)
-wordify(15)
-wordify(0)
