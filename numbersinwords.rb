@@ -1,77 +1,73 @@
-# def split_num(num, value)
-#   whole = (num/value) * value #gives num w/o remainder
-# end
+#convert a number into words
 
-# def take_away(num, value)
-#   num -= split_num(num, value)
-# end
+SINGLE ={
+1 => "One ",
+2 => "Two ",
+3 => "Three ",
+4 => "Four ",
+5 => "Five ",
+6 => "Six ",
+7 => "Seven ",
+8 => "Eight ",
+9 => "Nine "
+}
 
-# def num_array(num)
-#   num_list = []
+TEEN ={
+0 => "Ten",
+1 => "Eleven",
+2 => "Twelve",
+3 => "Thirteen ",
+4 => "Fourteen ",
+5 => "Fifteen ",
+6 => "Sixteen ",
+7 => "Seventeen ",
+8 => "Eighteen ",
+9 => "Nineteen "
+}
 
-#   places = [1000, 100, 10, 1]
+DOUBLE ={
+2 => "Twenty ",
+3 => "Thirty ",
+4 => "Forty ",
+5 => "Fifty ",
+6 => "Sixty ",
+7 => "Seventy ",
+8 => "Eighty ",
+9 => "Ninety "
+}
 
-#   for place in places
-#     if num >= place
-#       num_list << split_num(num, place) # ===> returns updated number
-#       num = take_away(num, place)
-#     end
-#   end
-#   print num_list
-# end
-
-# puts num_array(9077)
-
-
-def split_num(num, value)
-  whole = num/value
-end
-
-def take_away(num, value)
-  num -= split_num(num,value)
-end
-
-def zeroes(num)
-  places = num.to_s.length
-  number_array = [1, 2, 3, 4, 5]
-
-  for number in number_array
-    if number == places
-      print split_num(num, value).to_s + ("0"*(number-1))
-
-
-
-
-  if places == 0
-    print "no Number given"
-
-  elsif places == 1
-    print num.to_s + "" #if num length == 1 then length - 1 "0"
-  elsif places == 2
-    whole = num/10
-    print whole.to_s + ("0"*(places-1)) #if num length == 2 then num of "0" == length - 1
-  elsif places == 3
-    whole = num/100
-    print whole.to_s + ("0"*(places-1))
-  elsif places == 4
-    whole = num/1000
-    print whole.to_s + ("0"*(places-1))
-
-  elsif places == 5
-    whole = num/10000
-    print whole.to_s + ("0"*(places-1))
-  elsif places == 6
-    whole = num/100000
-    print whole.to_s + ("0"*(places-1))
-  elsif places > 6
-    print num.to_s + "Many zeros"
+def name(num, value, word)
+  if num > value
+    whole = num/value
+    print SINGLE[whole] + "#{word}"
+    num -= (whole * value)
   end
+  num #returns num if false
 end
-puts zeroes(6009)
 
-# #Find length of number
-# #length - 1 is equal to number of zeros
-# #length - 1 is also how you access the last digit
-# #
-# #iterate through number
+def doubles(num)
+  if num > 10
+    whole = num/10
+    remainder = num % 10
+    if whole > 1
+      print DOUBLE[whole]
+      num -= (whole * 10)
+    elsif whole == 1
+      print TEEN[remainder]
+      num -= num
+    end
+  end
+  #returns num if false
+end
 
+def wordify(num)
+  num = name(num, 1000, "Thousand ")
+  num = name(num, 100, "Hundred ")
+  num = doubles(num)
+  num = SINGLE[num]
+  puts num
+end
+
+wordify(9909)
+wordify(15)
+wordify(0)
