@@ -1,15 +1,19 @@
 class FizzBuzz
 
+  CONDITIONS = {
+    15 => "FizzBuzz",
+    3 => "Fizz",
+    5 => "Buzz"
+  }
+
   def convert(num)
 
     raise unless num.is_a?(Numeric)
 
-    if num % 15 == 0
-      return "FizzBuzz"
-    elsif num % 3 == 0
-      return "Fizz"
-    elsif num % 5 == 0
-      return "Buzz"
+    CONDITIONS.keys.each do |multiple|
+      if num % multiple == 0
+        return CONDITIONS[multiple]
+      end
     end
   end
 
