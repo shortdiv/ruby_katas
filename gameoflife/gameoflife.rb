@@ -55,3 +55,23 @@ class Game
 
   end
 end
+
+game = Game.new
+# game.game_board()
+game.find_neighbors(2,2)
+# game.transition
+
+# what variables go outside the range
+# => x_Pos, y_Pos
+
+# for each variable what is their valid range
+# => x_Pos within 0 - 4 Board[0].length => x
+# => y_Pos within 0 - 4 Board.length => y
+
+# how do you check valid range
+# => (0..Board[0].length).include?(x_Pos)
+# => (0..Board.length).include?(y_Pos)
+
+#What am I expecting? (definitely not a baby, thank god)
+# What do I get?
+# Is it what I'm expecting, if not, why? <- Andrew's questions to me. </3

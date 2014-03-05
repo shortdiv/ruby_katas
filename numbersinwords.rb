@@ -2,25 +2,35 @@ Singles = ["", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "ei
 Doubles = ["", "", "twenty ", "thirty ", "forty ", "fifty ", "sixty ", "seventy ", "eighty ", "ninety "]
 
 def wordify(num, value, word, list)
+  numberword = ""
   if num >= value
       # Teens Case
       if num < 19 && num > 9
-        print Singles[num]
+        numberword = Singles[num]
       else
         whole = num/value
-        print list[whole] + "#{word}"
+        numberword = list[whole] + "#{word}"
         num -= (whole * value)
       end
   end
-  num #return no
+  [num, numberword] #return no
 end
 
 def whole_word(num)
+  word_array = []
   if num == 0
     return "zero"
   end
-  num = wordify(num, 1000, "thousand ", Singles)
-  num = wordify(num, 100, "hundred ", Singles)
-  num = wordify(num, 10, "", Doubles)
-  num = Singles[num]
+  num, word = wordify(num, 1000, "thousand ", Singles)
+  word_array << word
+  num, word = wordify(num, 100, "hundred ", Singles)
+  word_array << word
+  num, word = wordify(num, 10, "", Doubles)
+  word_array << word
+  word_array << Singles[num]
+  word_array.join("")
 end
+
+puts whole_word(9860)
+
+#destructured assignment
