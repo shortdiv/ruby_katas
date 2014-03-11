@@ -1,9 +1,9 @@
 class Bowl
 
-  def score(numbers)
+  def score(game)
     @points = 0
-    numbers.each do |single|
-      @points += single
+    game.split("").each do |single|
+      @points += single.to_i
     end
     return @points
   end

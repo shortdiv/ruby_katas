@@ -9,6 +9,7 @@ class Bowling < MiniTest::Unit::TestCase
   end
 
   def test_score
-    assert_equal 10, @bowl_on.score([1,1,1,1,1,1,1,1,1,1])
+    assert_equal 20, @bowl_on.score("11111111111111111111")
   end
+
 end
