@@ -2,26 +2,27 @@ require_relative 'dice'
 require 'minitest/spec'
 require 'minitest/autorun'
 
-class TestDice < MiniTest::Unit::TestCase
-
-  def setup
+describe Dice do
+  before do
     @new_roll = Dice.new
   end
 
-  def test_hashing
-    assert_equal ({1=>3, 3=>1, 5=>1}), @new_roll.hashing([1,3,1,1,5])
+  describe "when asked to make a hash" do
+    it "makes a hash" do
+      @new_roll.hashing([1,3,1,1,5]).must_equal ({1=>3, 3=>1, 5=>1})
+    end
   end
 
-  def test_set_of_three
-    assert_equal ({1=>0, 3=>1, 5=>1}), @new_roll.set_of_three([1,3,5,1,1])
+  describe "when asked if there is a set of 3" do
+    it "will update and output the score" do
+      @new_roll.set_of_three([1,3,5,1,1]).must_equal ({1=>0, 3=>1, 5=>1})
+    end
   end
 
-  def test_set_of_three2
-    assert_equal ({1=>1, 3=>1}), @new_roll.set_of_three([1,3,1,1,1])
-  end
-
-  def test_score
-    assert_equal (1100), @new_roll.score([1,3,1,1,1])
+  describe "when asked about the total score" do
+    it "will calculate total score for 1 game" do
+      @new_roll.score([1,3,1,1,1]).must_equal 1100
+    end
   end
 
 end
