@@ -7,14 +7,14 @@ describe Dice do
     @new_roll = Dice.new
   end
 
-  describe "when asked to make a hash" do
-    it "makes a hash" do
+  describe "when asked for results in 5 rolls" do
+    it "makes an enumerated hash of results" do
       @new_roll.hashing([1,3,1,1,5]).must_equal ({1=>3, 3=>1, 5=>1})
     end
   end
 
-  describe "when asked if there is a set of 3" do
-    it "will update and output the score" do
+  describe "when asked if there is a set of 3 repeated results" do
+    it "will remove the set if there is one" do
       @new_roll.set_of_three([1,3,5,1,1]).must_equal ({1=>0, 3=>1, 5=>1})
     end
   end
