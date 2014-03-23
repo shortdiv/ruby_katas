@@ -1,14 +1,11 @@
-require "spec_helper"
+require File.join(File.dirname(__FILE__), "spec_helper" )
 require_relative "../gol"
 
 describe GameofLife do
-
-  it 'should change live cells to dead cells' do
-    expect {GameofLife}.to change {GameofLife.count}.from(4).to(0)
+   context "when given a gameboard of live and dead cells" do
+    it 'should check if a cell is alive and has fewer than 2 live neighbors' do
   end
-
-  ## changing state from initial state to final state ##
-
+end
 end
 
-#one specific board
+
