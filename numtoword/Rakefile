@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# -*- ruby  -*-
+
+require 'rake/clean'
+require 'rake/testtask'
+
+task :default => :test
+
+tast :test do
+  ruby ''
+end
+
+####http://www.railstips.org/blog/archives/2009/02/02/bedazzle-your-bash-prompt-with-git-info/
+###https://github.com/magicmonty/bash-git-prompt
+## https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
