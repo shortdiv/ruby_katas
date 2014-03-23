@@ -10,12 +10,12 @@ class Dice
   def set_of_three(dice)
     @points = 0
     hashing(dice)
-    @counter.select{ |element, count|
-      if @counter >= 3
+    @counter.select{ |element, count| #use each
+      if count >= 3
         if element == 1
           @points += 1000
         else
-          @points += (3 * element)
+          @points += (100 * element)
         end
         @counter[element] -= 3
       end

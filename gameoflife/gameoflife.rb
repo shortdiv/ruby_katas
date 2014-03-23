@@ -1,15 +1,17 @@
 class Game
+
+  #creates a board
   def initialize
-    @board = [ [false, false, false, false, false],
-               [false, false, false, true, false],
+    @board = [ [false, false, false, false, true],
+               [false, false, false, true, true],
                [false, false, true, false, false],
                [false, true, false, false, false],
                [false, false, false, false, false]
              ]
   end
 
-  def game_board
-
+  #prints current state of board
+  def print_board
     @board.each do |row|
       row_status = ""
       row.each do |piece|
@@ -19,22 +21,30 @@ class Game
           row_status << "O"
         end
       end
-    # puts row_status
+      puts row_status
     end
   end
 
-  # Create transitions
-  def transition
+  # Currently checks neighboring elements, prints multi-array
+  # should update the board acc to rules
+  def run
+    temp_board = []
+    print_board
     @board.each_with_index do |row, y|
-      assembled = ""
+      temp_row = []
       row.each_index do |x|
-        assembled << find_neighbors(x,y).to_s
+        neighbor = find_neighbors(x,y)
+        deadoralive(neighbor, @board[x][y])
+        temp_row << deadoralive(x,y)
       end
-       puts assembled
+      temp_board << temp_row
     end
+    @board = temp_board
+    puts #create space
+    print_board
   end
 
-  #finds neighboring elements
+  #finds neighboring live cells
   def find_neighbors(x,y)
     truths = 0
     for x_Pos in x-1..x+1
@@ -54,12 +64,26 @@ class Game
     return truths
 
   end
+
+  # is the piece alive or dead according to the rules of the game
+  def deadoralive(num, isalive)
+    if (isalive && num < 2) || (isalive && num > 3)
+      #PIECE IS NOW DEAD
+      false
+    elsif (isalive && num == 2) || (isalive && num == 3)
+      #PIECE IS NOW LIVE
+      true
+    elsif not isalive && num == 3
+     # PIECE IS ALIVE only if dead
+     true
+    end
+  end
+
 end
 
 game = Game.new
-# game.game_board()
-game.find_neighbors(2,2)
-# game.transition
+# print game.run
+
 
 # what variables go outside the range
 # => x_Pos, y_Pos
@@ -75,3 +99,6 @@ game.find_neighbors(2,2)
 #What am I expecting? (definitely not a baby, thank god)
 # What do I get?
 # Is it what I'm expecting, if not, why? <- Andrew's questions to me. </3
+
+
+## readability, build diff levels of feedback
