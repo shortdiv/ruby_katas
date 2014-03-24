@@ -35,22 +35,22 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a board of 3x3 with 3 vertical live cells in the middle return 3 middle horizontal live cells' do
+  it 'when given a board of 2x2 with all live cells return no all live board' do
     board_before =
     [
-      [DEAD, ALIVE, DEAD],
-      [DEAD, ALIVE, ALIVE],
-      [DEAD, ALIVE, ALIVE]
+      [ALIVE, ALIVE],
+      [ALIVE, ALIVE]
     ]
 
     board_after = GameofLife.evolve board_before
 
     board_after.should eq([
-        [0,0,0],
-        [1,1,1],
-        [0,0,0]
+      [1,1],
+      [1,1]
       ])
   end
+
+
 end
 
 
