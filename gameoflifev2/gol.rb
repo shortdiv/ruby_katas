@@ -1,5 +1,10 @@
 class GameofLife
-  def initialize(board)
-    @board = board
+
+  def self.evolve(board)
+    [
+      [0,0],
+      [0,0]
+    ]
   end
+
 end
