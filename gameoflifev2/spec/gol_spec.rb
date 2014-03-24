@@ -19,6 +19,22 @@ describe GameofLife do
         [0,0]
       ])
   end
+
+  it 'when given a 3X2 gameboard with 1 live cell in upper right return all dead board' do
+    board_before =
+    [
+      [ALIVE, DEAD, DEAD],
+      [DEAD, DEAD, DEAD]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+        [0,0,0],
+        [0,0,0]
+      ])
+  end
+
 end
 
 
