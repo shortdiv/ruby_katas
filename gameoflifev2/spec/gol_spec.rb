@@ -50,8 +50,42 @@ describe GameofLife do
       ])
   end
 
+  it 'when given a board of 2x2 return coordinates of neighbors for 0,0 return surrounding coords' do
+    board =
+    [
+      [DEAD,DEAD],
+      [DEAD,DEAD]
+    ]
+
+    results = GameofLife.neighbors(0,0,board)
+
+    results.should eq([
+      "0,1",
+      "1,0",
+      "1,1"
+      ])
+  end
 
 end
+
+  #   it 'when given a board of 3x3 with middle vertical live cells return middle horizontal live board' do
+  #   board_before =
+  #   [
+  #     [DEAD, ALIVE, DEAD],
+  #     [DEAD, ALIVE, DEAD],
+  #     [DEAD, ALIVE, DEAD]
+  #   ]
+
+  #   board_after = GameofLife.evolve board_before
+
+  #   board_after.should eq([
+  #     [0,0,0],
+  #     [1,1,1],
+  #     [0,0,0]
+  #     ])
+  # end
+
+
 
 
 
