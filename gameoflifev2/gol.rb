@@ -18,16 +18,26 @@ class GameofLife
 
   #create method to find neighbors
   def self.neighbors(x,y,board)
-    coord = []
-    for x_pos in x-1..x+1
-      for y_pos in y-1..y+1
-        if (0..board.length).include?(x_pos) && (0..board[0].length).include?(y_pos)
-          coord <<  x_pos.to_s + "," + y_pos.to_s
-        end
+    [
+    {x: x-1,y: y-1},
+    {x: x, y: y-1},
+    {x: x+1, y: y-1},
+    {x: x-1, y: y},
+    {x: x+1, y: y},
+    {x: x-1, y: y+1},
+    {x: x, y: y+1},
+    {x: x+1, y: y+1},
+  ]
+  end
+
+  def self.positive(coord)
+    possible_coordinates=[]
+    coord.each do |hash|
+      if hash[:x]>=0 && hash[:y]>=0
+        possible_coordinates << hash
       end
     end
-    coord -= ["x,y"]
-    return coord
+    possible_coordinates
   end
 
 end

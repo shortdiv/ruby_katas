@@ -57,15 +57,41 @@ describe GameofLife do
       [DEAD,DEAD]
     ]
 
-    results = GameofLife.neighbors(0,0,board)
+    possible_coordinates = GameofLife.neighbors(0,0,board)
 
-    results.should eq([
-      "0,1",
-      "1,0",
-      "1,1"
+    possible_coordinates.should eq([
+      {:x=>-1, :y=>-1},
+      {:x=>0, :y=>-1},
+      {:x=>1, :y=>-1},
+      {:x=>-1, :y=>0},
+      {:x=>1, :y=>0},
+      {:x=>-1, :y=>1},
+      {:x=>0, :y=>1},
+      {:x=>1, :y=>1}
       ])
   end
 
+  it 'when given an array of hash coordinates return an array of only positive coordinates' do
+    possible_coordinates =
+    ([
+      {:x=>-1, :y=>-1},
+      {:x=>0, :y=>-1},
+      {:x=>1, :y=>-1},
+      {:x=>-1, :y=>0},
+      {:x=>1, :y=>0},
+      {:x=>-1, :y=>1},
+      {:x=>0, :y=>1},
+      {:x=>1, :y=>1}
+      ])
+
+    valid_coordinates = GameofLife.positive(possible_coordinates)
+
+    valid_coordinates.should eq([
+      {:x=>1, :y=>0},
+      {:x=>0, :y=>1},
+      {:x=>1, :y=>1}
+      ])
+  end
 end
 
   #   it 'when given a board of 3x3 with middle vertical live cells return middle horizontal live board' do
