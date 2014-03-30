@@ -57,7 +57,7 @@ describe GameofLife do
       [DEAD,DEAD]
     ]
 
-    possible_coordinates = GameofLife.neighbors(0,0,board)
+    possible_coordinates = GameofLife.neighbors(0,1,board)
 
     possible_coordinates.should eq([
       {:x=>0, :y=>1},

@@ -21,7 +21,7 @@ class GameofLife
     coord =[]
     for x_pos in x-1..x+1
       for y_pos in y-1..y+1
-        if (0..board.length).include?(y_pos) && (0..board[0].length).include?(x_pos)
+        if (0...board.length).include?(y_pos) && (0...board[0].length).include?(x_pos)
           coord.push(x:x_pos,y:y_pos)
         end
       end
