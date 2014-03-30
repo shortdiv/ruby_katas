@@ -66,16 +66,18 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a 2x2 with dead cells return number of surrounding live cells for 0,0' do
+  it 'when given a 2x2 with 1 live cell in upper right return state of surrounding cells for 0,0' do
      board =
     [
-      [DEAD,DEAD],
+      [DEAD,ALIVE],
       [DEAD,DEAD]
     ]
 
     results = GameofLife.live(0,0,board)
 
-    results.should eq(0)
+    results.should eq([
+      DEAD,ALIVE,DEAD
+      ])
   end
 
 end

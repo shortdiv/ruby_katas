@@ -30,13 +30,10 @@ class GameofLife
   end
 
   def self.live(x,y,board)
-    alive = 0
-    if board[y][x+1] == ALIVE
-      alive += 1
-    elsif board[y+1][x] == ALIVE
-      alive += 1
-    elsif board[y+1][x+1] == ALIVE
-      alive += 1
+    alive = []
+    neighbor_cells = self.neighbors(x,y,board)
+    neighbor_cells.each do |hash|
+      alive << board[hash.values[1]][hash.values[0]]
     end
     alive
   end
