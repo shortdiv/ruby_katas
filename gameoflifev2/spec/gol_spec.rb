@@ -92,6 +92,26 @@ describe GameofLife do
       {:x=>1, :y=>1}
       ])
   end
+
+  it 'when given a board of 3x3 return no of surrounding cells for cell 0,0' do
+
+    board =
+      ([
+      {:x=>-1, :y=>-1},
+      {:x=>0, :y=>-1},
+      {:x=>1, :y=>-1},
+      {:x=>-1, :y=>0},
+      {:x=>1, :y=>0},
+      {:x=>-1, :y=>1},
+      {:x=>0, :y=>1},
+      {:x=>1, :y=>1}
+      ])
+
+    result = GameofLife.live(board)
+
+    result.should eq(3)
+  end
+
 end
 
   #   it 'when given a board of 3x3 with middle vertical live cells return middle horizontal live board' do

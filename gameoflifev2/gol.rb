@@ -40,4 +40,7 @@ class GameofLife
     possible_coordinates
   end
 
+    def self.live(coord)
+      self.positive(coord).length
+    end
 end
