@@ -72,6 +72,25 @@ describe GameofLife do
       ])
   end
 
+    it 'when given a 4x4 of pattern beacon implement' do
+        board_before =
+    [
+      [ALIVE, ALIVE, DEAD, DEAD],
+      [ALIVE, ALIVE, DEAD, DEAD],
+      [DEAD, DEAD, ALIVE, ALIVE],
+      [DEAD, DEAD, ALIVE, ALIVE]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+      [ALIVE,ALIVE,DEAD,DEAD],
+      [ALIVE,DEAD,DEAD,DEAD],
+      [DEAD,DEAD,DEAD,ALIVE],
+      [DEAD,DEAD,ALIVE,ALIVE]
+      ])
+  end
+
   it 'when given a board of 2x2 return coordinates of neighbors for 0,0 return surrounding valid coords' do
     board =
     [
