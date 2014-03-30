@@ -59,41 +59,11 @@ describe GameofLife do
 
     possible_coordinates = GameofLife.neighbors(0,0,board)
 
-    possible_coordinates.should eq([
-      {:x=>0, :y=>1},
-      {:x=>1, :y=>0},
-      {:x=>1, :y=>1}
-      ])
-  end
+    possible_coordinates.should eq(0)
 
-  xit 'when given a 2x2 with 1 live cell in upper right return state of surrounding cells for 0,0' do
-     board =
-    [
-      [DEAD,ALIVE],
-      [DEAD,DEAD]
-    ]
-
-    results = GameofLife.surrounding_state(0,0,board)
-
-    results.should eq([
-      DEAD,ALIVE,DEAD
-      ])
   end
 
   xit 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
-
-    board = [
-      [ALIVE,ALIVE],
-      [ALIVE,ALIVE]
-    ]
-
-    results = GameofLife.live(0,0,board)
-
-    results.should eq(3) #allows comparison regardless of obj type
-
-  end
-
-    xit 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
 
     board = [
       [ALIVE,DEAD],

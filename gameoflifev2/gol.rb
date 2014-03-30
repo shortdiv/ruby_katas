@@ -12,43 +12,25 @@ class GameofLife
 
   #find neighbor coordinates
   def self.neighbors(x,y,board)
-    coord =[]
+    alive = 0
     for x_pos in x-1..x+1
       for y_pos in y-1..y+1
         if (0...board.length).include?(y_pos) && (0...board[0].length).include?(x_pos)
-          coord << board[y_pos][x_pos]
+          if board[y_pos][x_pos] == ALIVE
+            alive += 1
+          end
         end
       end
     end
-    coord -= [board[y][x]] #cant remove (x,y) element as it is not unique; returns []
-    coord
-  end
-
-  #find state of surrounding cells
-  def self.surrounding_state(x,y,board)
-    neighbor_cells = self.neighbors(x,y,board)
-    surrounding = []
-    neighbor_cells.each do |hash|
-      surrounding << board[hash.values[1]][hash.values[0]]
-    end
-    surrounding
-  end
-
-  #find number of live surrounding cells
-  def self.live(x,y,board)
-    surround_cells = self.surrounding_state(x,y,board)
-    alive = 0
-    surround_cells.each do |cell|
-      if cell == ALIVE
-        alive += 1
-      end
+    if board[y][x] == ALIVE
+      alive -= 1
     end
     alive
   end
 
   #obey rules
   def self.rules(x,y,board)
-    live = self.live(x,y,board)
+    live = self.neighbors(x,y,board)
     if board[y][x] == ALIVE && live < 2
       state = DEAD
     elsif board[y][x] == ALIVE && live > 3
