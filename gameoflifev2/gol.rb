@@ -1,15 +1,13 @@
 class GameofLife
 
   def self.evolve(board)
-    new_board = []
     board.each_with_index do |row, y|
       new_row = []
-      row.each_with_index do |cell, x|
-        new_row << self.live(x,y,board)
+      row.each_index do |x|
+        new_row << self.rules(x,y,board)
       end
-      new_board << new_row
+      return new_row
     end
-    return new_board
   end
 
   #find neighbor coordinates
@@ -23,18 +21,20 @@ class GameofLife
       end
     end
     coord -= [{x:x,y:y}] #remove given coord
+    coord
   end
 
   #find state of surrounding cells
   def self.surrounding_state(x,y,board)
-    alive = []
     neighbor_cells = self.neighbors(x,y,board)
+    surrounding = []
     neighbor_cells.each do |hash|
-      alive << board[hash.values[1]][hash.values[0]]
+      surrounding << board[hash.values[1]][hash.values[0]]
     end
-    alive
+    surrounding
   end
 
+  #find number of live surrounding cells
   def self.live(x,y,board)
     surround_cells = self.surrounding_state(x,y,board)
     alive = 0
@@ -46,6 +46,7 @@ class GameofLife
     alive
   end
 
+  #obey rules
   def self.rules(x,y,board)
     live = self.live(x,y,board)
     if board[y][x] == ALIVE && live < 2
