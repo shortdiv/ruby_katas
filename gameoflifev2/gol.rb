@@ -16,7 +16,7 @@ class GameofLife
     return new_board
   end
 
-  #create method to find neighbors
+  #find neighbor coordinates
   def self.neighbors(x,y,board)
     coord =[]
     for x_pos in x-1..x+1
@@ -29,11 +29,23 @@ class GameofLife
     coord -= [{x:x,y:y}] #remove given coord
   end
 
-  def self.live(x,y,board)
+  #find state of surrounding cells
+  def self.surrounding_state(x,y,board)
     alive = []
     neighbor_cells = self.neighbors(x,y,board)
     neighbor_cells.each do |hash|
       alive << board[hash.values[1]][hash.values[0]]
+    end
+    alive
+  end
+
+  def self.live(x,y,board)
+    surround_cells = self.surrounding_state(x,y,board)
+    alive = 0
+    surround_cells.each do |cell|
+      if cell == ALIVE
+        alive += 1
+      end
     end
     alive
   end
