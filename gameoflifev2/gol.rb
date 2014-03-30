@@ -33,13 +33,13 @@ class GameofLife
 
   #obey rules
   def self.rules(live, isalive)
-    if (isalive && live < 2) || (isalive && live > 3)
+    if (isalive == ALIVE && live < 2) || (isalive && live > 3)
       state = DEAD
-    elsif isalive && (live == 2 || live == 3)
+    elsif isalive == ALIVE && (live == 2 || live == 3)
       state = ALIVE
-    elsif (not isalive) && live == 3
+    elsif (isalive != ALIVE) && (live == 3)
       state = ALIVE
-    elsif (not isalive) && live < 3
+    elsif (isalive != ALIVE) && (live < 3)
       state = DEAD
     end
     state

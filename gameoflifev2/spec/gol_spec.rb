@@ -53,6 +53,25 @@ describe GameofLife do
       ])
   end
 
+  it 'when given a 4x4 of pattern toad implement' do
+        board_before =
+    [
+      [DEAD, DEAD, DEAD, DEAD],
+      [DEAD, ALIVE, ALIVE, ALIVE],
+      [ALIVE, ALIVE, ALIVE, DEAD],
+      [DEAD, DEAD, DEAD, DEAD]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+      [DEAD,DEAD,ALIVE,DEAD],
+      [ALIVE,DEAD,DEAD,ALIVE],
+      [ALIVE,DEAD,DEAD,ALIVE],
+      [DEAD,ALIVE,DEAD,DEAD]
+      ])
+  end
+
   it 'when given a board of 2x2 return coordinates of neighbors for 0,0 return surrounding valid coords' do
     board =
     [
