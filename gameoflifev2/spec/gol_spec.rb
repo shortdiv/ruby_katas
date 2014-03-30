@@ -93,23 +93,18 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a board of 3x3 return no of surrounding cells for cell 0,0' do
+  it 'when given a 2x2 with dead cells return number of surrounding live cells for 0,0' do
 
-    board =
-      ([
-      {:x=>-1, :y=>-1},
-      {:x=>0, :y=>-1},
-      {:x=>1, :y=>-1},
-      {:x=>-1, :y=>0},
-      {:x=>1, :y=>0},
-      {:x=>-1, :y=>1},
-      {:x=>0, :y=>1},
-      {:x=>1, :y=>1}
-      ])
+     board =
+    [
+      [DEAD,DEAD],
+      [DEAD,DEAD]
+    ]
 
-    result = GameofLife.live(board)
+    results = GameofLife.live(0,0,board)
 
-    result.should eq(3)
+    results.should eq(0)
+
   end
 
 end

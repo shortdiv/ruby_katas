@@ -40,7 +40,16 @@ class GameofLife
     possible_coordinates
   end
 
-    def self.live(coord)
-      self.positive(coord).length
+  def self.live(x,y,board)
+    alive = 0
+    if board[y][x+1] == ALIVE
+      alive += 1
+    elsif board[y+1][x] == ALIVE
+      alive += 1
+    elsif board[y+1][x+1] == ALIVE
+      alive += 1
     end
+    alive
+  end
+
 end
