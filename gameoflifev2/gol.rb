@@ -1,13 +1,16 @@
 class GameofLife
 
   def self.evolve(board)
+    new_board = []
     board.each_with_index do |row, y|
       new_row = []
       row.each_index do |x|
-        new_row << self.rules(x,y,board)
+        neighbor = self.neighbors(x,y,board)
+        new_row << self.rules(neighbor, board[y][x])
       end
-      return new_row
+      new_board << new_row
     end
+    new_board
   end
 
   #find neighbor coordinates
