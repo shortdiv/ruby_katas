@@ -93,6 +93,19 @@ describe GameofLife do
 
   end
 
+    it 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
+
+    board = [
+      [ALIVE,ALIVE],
+      [ALIVE,ALIVE]
+    ]
+
+    results = GameofLife.rules(0,0,board)
+
+    expect(results).to eq(ALIVE) #allows comparison regardless of obj type
+
+  end
+
 end
 
   #   it 'when given a board of 3x3 with middle vertical live cells return middle horizontal live board' do

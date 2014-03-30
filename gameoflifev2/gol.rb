@@ -50,4 +50,13 @@ class GameofLife
     alive
   end
 
+
+  def self.rules(x,y,board)
+    live = self.live(x,y,board)
+    if board[y][x] == ALIVE && (live == 3 || live == 2)
+      state = ALIVE
+    end
+    state
+  end
+
 end
