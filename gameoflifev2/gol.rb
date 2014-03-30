@@ -5,7 +5,7 @@ class GameofLife
     board.each_with_index do |row, y|
       new_row = []
       row.each_with_index do |cell, x|
-        new_row << self.surrounding_state(x,y,board)
+        new_row << self.live(x,y,board)
       end
       new_board << new_row
     end
