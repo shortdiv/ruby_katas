@@ -1,14 +1,119 @@
-require "spec_helper"
+require File.join(File.dirname(__FILE__), "spec_helper" )
 require_relative "../gol"
 
-describe GameofLife do
+DEAD = "dead"
+ALIVE = "alive"
 
-  it 'should change live cells to dead cells' do
-    expect {GameofLife}.to change {GameofLife.count}.from(4).to(0)
+describe GameofLife do
+  it 'when given a 2x2 gameboard of 1 live cell in upper right return an all dead board' do
+    board_before =
+    [
+      [ALIVE, DEAD],
+      [DEAD, DEAD]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+        [DEAD,DEAD],
+        [DEAD,DEAD]
+      ])
   end
 
-  ## changing state from initial state to final state ##
+  it 'when given a 3X2 gameboard with 1 live cell in upper right return all dead board' do
+    board_before =
+    [
+      [ALIVE, DEAD, DEAD],
+      [DEAD, DEAD, DEAD]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+        [DEAD,DEAD,DEAD],
+        [DEAD,DEAD,DEAD]
+      ])
+  end
+
+
+  it 'when given a board of 3x3 with middle vertical live cells return middle horizontal live board' do
+    board_before =
+    [
+      [DEAD, ALIVE, DEAD],
+      [DEAD, ALIVE, DEAD],
+      [DEAD, ALIVE, DEAD]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+      [DEAD,DEAD,DEAD],
+      [ALIVE,ALIVE,ALIVE],
+      [DEAD,DEAD,DEAD]
+      ])
+  end
+
+  it 'when given a 4x4 of pattern toad implement' do
+        board_before =
+    [
+      [DEAD, DEAD, DEAD, DEAD],
+      [DEAD, ALIVE, ALIVE, ALIVE],
+      [ALIVE, ALIVE, ALIVE, DEAD],
+      [DEAD, DEAD, DEAD, DEAD]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+      [DEAD,DEAD,ALIVE,DEAD],
+      [ALIVE,DEAD,DEAD,ALIVE],
+      [ALIVE,DEAD,DEAD,ALIVE],
+      [DEAD,ALIVE,DEAD,DEAD]
+      ])
+  end
+
+    it 'when given a 4x4 of pattern beacon implement' do
+        board_before =
+    [
+      [ALIVE, ALIVE, DEAD, DEAD],
+      [ALIVE, ALIVE, DEAD, DEAD],
+      [DEAD, DEAD, ALIVE, ALIVE],
+      [DEAD, DEAD, ALIVE, ALIVE]
+    ]
+
+    board_after = GameofLife.evolve board_before
+
+    board_after.should eq([
+      [ALIVE,ALIVE,DEAD,DEAD],
+      [ALIVE,DEAD,DEAD,DEAD],
+      [DEAD,DEAD,DEAD,ALIVE],
+      [DEAD,DEAD,ALIVE,ALIVE]
+      ])
+  end
+
+  it 'when given a board of 2x2 return coordinates of neighbors for 0,0 return surrounding valid coords' do
+    board =
+    [
+      [DEAD,DEAD],
+      [DEAD,DEAD]
+    ]
+
+    possible_coordinates = GameofLife.neighbors(0,0,board)
+
+    possible_coordinates.should eq(0)
+
+  end
+
+  it 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
+
+    results = GameofLife.rules(0, ALIVE)
+
+    results.should eq(DEAD)
+
+  end
 
 end
 
-#one specific board
+
+
+
