@@ -35,7 +35,7 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a board of 2x2 with all live cells return no all live board' do
+  it 'when given a board of 2x2 with all live cells return all live board' do
     board_before =
     [
       [ALIVE, ALIVE],
@@ -50,7 +50,7 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a board of 2x2 return coordinates of neighbors for 0,0 return surrounding coords' do
+  it 'when given a board of 2x2 return coordinates of neighbors for 0,0 return surrounding valid coords' do
     board =
     [
       [DEAD,DEAD],
@@ -60,41 +60,13 @@ describe GameofLife do
     possible_coordinates = GameofLife.neighbors(0,0,board)
 
     possible_coordinates.should eq([
-      {:x=>-1, :y=>-1},
-      {:x=>0, :y=>-1},
-      {:x=>1, :y=>-1},
-      {:x=>-1, :y=>0},
-      {:x=>1, :y=>0},
-      {:x=>-1, :y=>1},
       {:x=>0, :y=>1},
-      {:x=>1, :y=>1}
-      ])
-  end
-
-  it 'when given an array of hash coordinates return an array of only positive coordinates' do
-    possible_coordinates =
-    ([
-      {:x=>-1, :y=>-1},
-      {:x=>0, :y=>-1},
-      {:x=>1, :y=>-1},
-      {:x=>-1, :y=>0},
       {:x=>1, :y=>0},
-      {:x=>-1, :y=>1},
-      {:x=>0, :y=>1},
-      {:x=>1, :y=>1}
-      ])
-
-    valid_coordinates = GameofLife.positive(possible_coordinates)
-
-    valid_coordinates.should eq([
-      {:x=>1, :y=>0},
-      {:x=>0, :y=>1},
       {:x=>1, :y=>1}
       ])
   end
 
   it 'when given a 2x2 with dead cells return number of surrounding live cells for 0,0' do
-
      board =
     [
       [DEAD,DEAD],
@@ -104,7 +76,6 @@ describe GameofLife do
     results = GameofLife.live(0,0,board)
 
     results.should eq(0)
-
   end
 
 end
