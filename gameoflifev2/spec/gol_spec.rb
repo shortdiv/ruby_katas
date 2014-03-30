@@ -5,7 +5,7 @@ DEAD = "dead"
 ALIVE = "alive"
 
 describe GameofLife do
-  it 'when given a 2x2 gameboard of 1 live cell in upper right return an all dead board' do
+  xit 'when given a 2x2 gameboard of 1 live cell in upper right return an all dead board' do
     board_before =
     [
       [ALIVE, DEAD],
@@ -66,7 +66,7 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a 2x2 with 1 live cell in upper right return state of surrounding cells for 0,0' do
+  xit 'when given a 2x2 with 1 live cell in upper right return state of surrounding cells for 0,0' do
      board =
     [
       [DEAD,ALIVE],
@@ -80,7 +80,7 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
+  xit 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
 
     board = [
       [ALIVE,ALIVE],
@@ -93,7 +93,7 @@ describe GameofLife do
 
   end
 
-    it 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
+    xit 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
 
     board = [
       [ALIVE,DEAD],
