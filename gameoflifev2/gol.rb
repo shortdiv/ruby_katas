@@ -20,6 +20,7 @@ class GameofLife
         end
       end
     end
+    coord -= [board[y][x]] #cant remove (x,y) element as it is not unique; returns []
     coord
   end
 
