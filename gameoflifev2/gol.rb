@@ -5,11 +5,7 @@ class GameofLife
     board.each_with_index do |row, y|
       new_row = []
       row.each_with_index do |cell, x|
-        if cell == ALIVE && (board[y][x - 1] == ALIVE) #if cells next to it are alive
-          new_row << 1
-        else
-          new_row << 0
-        end
+        new_row << self.surrounding_state(x,y,board)
       end
       new_board << new_row
     end

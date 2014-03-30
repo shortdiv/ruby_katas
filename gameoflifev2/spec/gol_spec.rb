@@ -20,7 +20,7 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a 3X2 gameboard with 1 live cell in upper right return all dead board' do
+  xit 'when given a 3X2 gameboard with 1 live cell in upper right return all dead board' do
     board_before =
     [
       [ALIVE, DEAD, DEAD],
@@ -35,7 +35,7 @@ describe GameofLife do
       ])
   end
 
-  it 'when given a board of 2x2 with all live cells return all live board' do
+  xit 'when given a board of 2x2 with all live cells return all live board' do
     board_before =
     [
       [ALIVE, ALIVE],
