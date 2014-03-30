@@ -97,7 +97,7 @@ describe GameofLife do
 
     board = [
       [ALIVE,ALIVE],
-      [ALIVE,ALIVE]
+      [ALIVE,ALIVE],
     ]
 
     results = GameofLife.rules(0,0,board)
