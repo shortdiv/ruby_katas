@@ -63,14 +63,9 @@ describe GameofLife do
 
   end
 
-  xit 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
+  it 'when given a board and coords of a cell it checks whether the cell lives or dies in next gen' do
 
-    board = [
-      [ALIVE,DEAD],
-      [DEAD,DEAD],
-    ]
-
-    results = GameofLife.rules(0,0,board)
+    results = GameofLife.rules(0, ALIVE)
 
     results.should eq(DEAD)
 

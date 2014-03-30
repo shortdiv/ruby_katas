@@ -29,16 +29,15 @@ class GameofLife
   end
 
   #obey rules
-  def self.rules(x,y,board)
-    live = self.neighbors(x,y,board)
-    if board[y][x] == ALIVE && live < 2
+  def self.rules(live, isalive)
+    if (isalive && live < 2) || (isalive && live > 3)
       state = DEAD
-    elsif board[y][x] == ALIVE && live > 3
+    elsif isalive && (live == 2 || live == 3)
+      state = ALIVE
+    elsif (not isalive) && live == 3
+      state = ALIVE
+    elsif (not isalive) && live < 3
       state = DEAD
-    elsif board[y][x] == ALIVE && (live == 2 || live == 3)
-      state = ALIVE
-    elsif board[y][x] == DEAD && live == 3
-      state = ALIVE
     end
     state
   end
