@@ -33,16 +33,76 @@ class GameofLife
 
   #obey rules
   def self.rules(live, isalive)
-    if (isalive == ALIVE && live < 2) || (isalive && live > 3)
-      state = DEAD
-    elsif isalive == ALIVE && (live == 2 || live == 3)
-      state = ALIVE
-    elsif (isalive != ALIVE) && (live == 3)
-      state = ALIVE
-    elsif (isalive != ALIVE) && (live < 3)
-      state = DEAD
+    underpopulate = Underpopulate.new
+    overpopulate = Overpopulate.new
+    survive = Survive.new
+    revive = Revive.new
+    staydead = StayDead.new
+
+
+    if underpopulate.is_it_happening?(live, isalive)
+      state = Underpopulate.new.next_state
+    elsif Overpopulate.new.is_it_happening(live, isalive)
+      state = Overpopulate.new.next_state
+    elsif Survive.new.is_it_happening(live, isalive)
+      state = Survive.new.next_state
+    elsif Revive.new.is_it_happening(live, isalive)
+      state = Revive.new.next_state
+    elsif StayDead.new.is_it_happening(live, isalive)
+      state = StayDead.new.next_state
     end
     state
+  end
+
+  #splitting up rules
+  class Underpopulate
+    def is_it_happening?(isalive, live)
+      (isalive == ALIVE && live < 2)
+    end
+
+    def next_state
+      state = DEAD
+    end
+  end
+
+  class Overpopulate
+    def is_it_happening?(isalive, live)
+      isalive == ALIVE && live > 3
+    end
+
+    def next_state
+      state = DEAD
+    end
+  end
+
+  class Survive
+    def is_it_happening?(isalive, live)
+      isalive == ALIVE && (live == 2 || live == 3)
+    end
+
+    def next_state
+      state = ALIVE
+    end
+  end
+
+  class Revive
+    def is_it_happening?(isalive,live)
+      (isalive == DEAD) && (live == 3)
+    end
+
+    def next_state
+      state = ALIVE
+    end
+  end
+
+  class StayDead
+    def is_it_happening?(isalive,live)
+      (isalive != ALIVE) && live < 3
+    end
+
+    def next_state
+      state = DEAD
+    end
   end
 
 end
