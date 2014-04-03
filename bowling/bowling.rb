@@ -1,22 +1,25 @@
-class Bowl
+class Bowling
 
-  def score(game)
-    @points = 0
-    game.each_char do |single|
-      if single == "/"
-        @points += 10
-      else
-      #   index = game.index(single) #get index of one throw score
-      #   @points += 10 #+ game_array[index + 1].to_i
-      #   single = game[index + 2]
-      # end
-        @points += single.to_i
+  class OpenGame
+
+    def what_kind_of_game?(game)
+      game.each_char do |throw|
+        if (throw == "/") || (throw == "X")
+          return false
+        else
+          return true
+        end
       end
     end
-    return @points
-  end
 
-  def spare(game)
+    def score(game)
+      @points = 0
+      game.each_char do |single|
+        @points += single.to_i
+      end
+      return @points
+    end
+
   end
 
 end
