@@ -5,6 +5,7 @@ describe Game do
   it "has a zero score" do
     expect(subject.score).to eq(0)
   end
+
   describe "Rolling a Ball" do
     it "changes the score" do
       subject.roll(4)
@@ -20,13 +21,24 @@ describe Game do
     end
   end
 
-end
-
-describe Frame
-  context "when fewer than 10 pins are knocked down" do
-    it "is an open frame" do
-      #when you call roll, what do you want code in toll to look like?
+  describe "Rolled 3 times, the second time is a spare" do
+    it "adds the bonus spare into score" do
+      subject.roll(4)
+      subject.roll(6)
+      subject.roll(3)
+      expect(subject.score).to eq(16)
     end
   end
 
 end
+
+describe Frame do
+  context "when fewer than 10 pins are knocked down" do
+    it "is an open frame" do
+      expect(subject.openframe?).to eq(true)
+    end
+  end
+
+end
+
+
