@@ -1,4 +1,5 @@
 class Game
+
   attr_reader :rolls
   attr_accessor :score
 
@@ -17,7 +18,6 @@ class Game
     end
     @score
   end
-
 end
 
 class Frame
