@@ -23,7 +23,6 @@ describe Game do
 
   describe "Rolled 3 times, the second time is a spare" do
     it "adds the bonus spare into score" do
-      pending 'not implemented spare scoring'
       subject.roll(4)
       subject.roll(6)
       subject.roll(3)
@@ -36,7 +35,11 @@ end
 describe SpareFrame do
   context "when fewer than 10 pins are knocked down" do
     it "is a spare" do
-      results = subject.spare?([6,4])
+      subject.roll(6)
+      subject.roll(4)
+      subject.roll(3)
+      subject.frames
+      results = subject.type_of_game?
       expect(results).to eq(true)
     end
 
@@ -44,15 +47,16 @@ describe SpareFrame do
       subject.roll(6)
       subject.roll(4)
       subject.roll(3)
-      expect(subject.spare_score).to eq(13)
+      subject.frames
+      expect(subject.score).to eq(13)
     end
   end
 end
 
-describe StrikeGame do
+describe StrikeFrame do
   context 'when all 10 pins are knocked down in the first throw of a frame' do
     it 'is a strike' do
-      results = subject.strike?([10,0])
+      results = subject.type_of_game?([10,0])
       expect(results).to eq(true)
     end
 
@@ -61,22 +65,22 @@ describe StrikeGame do
       subject.roll(0)
       subject.roll(3)
       subject.roll(2)
-      expect(subject.strike_score).to eq(15)
+      expect(subject.score).to eq(15)
     end
   end
 end
 
-describe OpenGame do
+describe OpenFrame do
   context 'when fewer than 10 pins are knocked down in a frame' do
     it 'is an open game' do
-      results = subject.open?([3,4])
+      results = subject.type_of_game?([3,4])
       expect(results).to eq(true)
     end
 
     it 'adds score for an open game' do
       subject.roll(4)
       subject.roll(3)
-      expect(subject.open_score).to eq(7)
+      expect(subject.score).to eq(7)
     end
   end
 end

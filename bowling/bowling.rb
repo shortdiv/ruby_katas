@@ -12,46 +12,43 @@ class Game
     @rolls << pins
   end
 
-  def score
-    @rolls.each do |r|
-      @score += r
-    end
-    @score
+  def frames
+    @frames = @rolls.each_slice(2).to_a
   end
+
 end
 
 class SpareFrame < Game
 
-  def spare?(frame)
-    frame[0] + frame[1] == 10
+  def type_of_game?
+    @frames[0][0] + @frames[0][1] == 10
   end
 
   #method should take in a game and be able to calculate score
-  def spare_score
-    split_into_frames = @rolls.each_slice(2).to_a #split game into frames of 2 throws
-    @score = 10 + split_into_frames[1][0] #10 plus next no. of pins in next throw
+  def score
+    @score = 10 + @frames[1][0] #10 plus next no. of pins in next throw
   end
 
 end
 
-class StrikeGame < Game
-  def strike?(frame)
+class StrikeFrame < Game
+  def type_of_game?(frame)
     frame[0] == 10
   end
 
-  def strike_score
+  def score
     split_into_frames = @rolls.each_slice(2).to_a #split game into frames
     @score = 10 + split_into_frames[1][0] + split_into_frames[1][1]
   end
 
 end
 
-class OpenGame < Game
-  def open?(frame)
+class OpenFrame < Game
+  def type_of_game?(frame)
     frame[0] + frame[1] < 10
   end
 
-  def open_score
+  def score
     split_into_frames = @rolls.each_slice(2).to_a #split game into frames
     @score =  split_into_frames[0][0] + split_into_frames[0][1]
   end
