@@ -14,4 +14,3 @@ class Cell
   end
 
 end
-
