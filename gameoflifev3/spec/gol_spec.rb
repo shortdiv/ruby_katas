@@ -9,6 +9,12 @@ describe Cell do
     expect(subject.neighbors).to eq(0)
   end
 
+  it 'kills a cell' do
+    subject.kill
+    expect(subject.isalive?).to eq(false)
+  end
+
+
 end
 
 describe Game do

@@ -13,6 +13,10 @@ class Cell
     @neighbors
   end
 
+  def kill
+    @isalive = false
+  end
+
 end
 
 class Game
