@@ -45,3 +45,15 @@ class StrikeGame < Game
   end
 
 end
+
+class OpenGame < Game
+  def open?(frame)
+    frame[0] + frame[1] < 10
+  end
+
+  def open_score
+    split_into_frames = @rolls.each_slice(2).to_a #split game into frames
+    @score =  split_into_frames[0][0] + split_into_frames[0][1]
+  end
+end
+

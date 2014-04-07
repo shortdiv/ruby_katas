@@ -66,3 +66,18 @@ describe StrikeGame do
   end
 end
 
+describe OpenGame do
+  context 'when fewer than 10 pins are knocked down in a frame' do
+    it 'is an open game' do
+      results = subject.open?([3,4])
+      expect(results).to eq(true)
+    end
+
+    it 'adds score for an open game' do
+      subject.roll(4)
+      subject.roll(3)
+      expect(subject.open_score).to eq(7)
+    end
+  end
+end
+
