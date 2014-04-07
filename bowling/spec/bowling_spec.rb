@@ -38,7 +38,6 @@ describe SpareFrame do
       subject.roll(6)
       subject.roll(4)
       subject.roll(3)
-      subject.frames
       results = subject.type_of_game?
       expect(results).to eq(true)
     end
@@ -47,7 +46,6 @@ describe SpareFrame do
       subject.roll(6)
       subject.roll(4)
       subject.roll(3)
-      subject.frames
       expect(subject.score).to eq(13)
     end
   end
@@ -56,7 +54,11 @@ end
 describe StrikeFrame do
   context 'when all 10 pins are knocked down in the first throw of a frame' do
     it 'is a strike' do
-      results = subject.type_of_game?([10,0])
+      subject.roll(10)
+      subject.roll(0)
+      subject.roll(3)
+      subject.roll(2)
+      results = subject.type_of_game?
       expect(results).to eq(true)
     end
 
@@ -73,7 +75,9 @@ end
 describe OpenFrame do
   context 'when fewer than 10 pins are knocked down in a frame' do
     it 'is an open game' do
-      results = subject.type_of_game?([3,4])
+      subject.roll(4)
+      subject.roll(3)
+      results = subject.type_of_game?
       expect(results).to eq(true)
     end
 
