@@ -19,8 +19,8 @@ class Game
     open = OpenFrame.new
     game_types = [strike,spare,open]
     game_types.each do |game|
-      if game.type_of_game?
-        game.score!
+      if game.type_of_frame?(@frames)
+        game.score
       end
     end
   end
@@ -29,8 +29,8 @@ end
 
 class SpareFrame < Game
 
-  def type_of_game?
-    @frames[0][0] + @frames[0][1] == 10
+  def type_of_frame?(frames)
+    frames[0][0] + frames[0][1] == 10
   end
 
   #method should take in a game and be able to calculate score
@@ -41,8 +41,8 @@ class SpareFrame < Game
 end
 
 class StrikeFrame < Game
-  def type_of_game?
-    @frames[0][0] == 10
+  def type_of_frame?(frames)
+    frames[0][0] == 10
   end
 
   def score
@@ -52,8 +52,8 @@ class StrikeFrame < Game
 end
 
 class OpenFrame < Game
-  def type_of_game?
-    @frames[0][0] + @frames[0][1] < 10
+  def type_of_frame?(frames)
+    frames[0][0] + frames[0][1] < 10
   end
 
   def score
