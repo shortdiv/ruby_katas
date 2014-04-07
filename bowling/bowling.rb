@@ -20,9 +20,8 @@ class Game
   end
 end
 
-class Frame
-
-  def openframe?
-    true
+class OpenFrame
+  def open_frame?(frame)
+    frame[0] + frame[1] == 10
   end
 end
