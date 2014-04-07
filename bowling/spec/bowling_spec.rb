@@ -33,11 +33,18 @@ describe Game do
 
 end
 
-describe OpenFrame do
+describe Frame do
   context "when fewer than 10 pins are knocked down" do
-    it "is an open frame" do
-      results = subject.open_frame?([6,4])
+    it "is a spare" do
+      results = subject.spare?([6,4])
       expect(results).to eq(true)
+    end
+
+    it 'adds score for spare' do
+      subject.roll(6)
+      subject.roll(4)
+      subject.roll(3)
+      expect(subject.spare_score).to eq(13)
     end
   end
 
