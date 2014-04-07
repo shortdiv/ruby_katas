@@ -33,7 +33,7 @@ describe Game do
 
 end
 
-describe Frame do
+describe SpareFrame do
   context "when fewer than 10 pins are knocked down" do
     it "is a spare" do
       results = subject.spare?([6,4])
@@ -47,6 +47,22 @@ describe Frame do
       expect(subject.spare_score).to eq(13)
     end
   end
+end
 
+describe StrikeGame do
+  context 'when all 10 pins are knocked down in the first throw of a frame' do
+    it 'is a strike' do
+      results = subject.strike?([10,0])
+      expect(results).to eq(true)
+    end
+
+    it 'adds score for a strike' do
+      subject.roll(10)
+      subject.roll(0)
+      subject.roll(3)
+      subject.roll(2)
+      expect(subject.strike_score).to eq(15)
+    end
+  end
 end
 
