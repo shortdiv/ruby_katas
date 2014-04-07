@@ -13,6 +13,18 @@ class Game
     @frames = @rolls.each_slice(2).to_a
   end
 
+  def calculate_total_score
+    strike = StrikeFrame.new
+    spare = SpareFrame.new
+    open = OpenFrame.new
+    game_types = [strike,spare,open]
+    game_types.each do |game|
+      if game.type_of_game?
+        game.score!
+      end
+    end
+  end
+
 end
 
 class SpareFrame < Game

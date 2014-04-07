@@ -3,13 +3,13 @@ require_relative '../bowling'
 describe Game do
 
   it "has a zero score" do
-    expect(subject.score).to eq(0)
+    expect(subject.calculate_total_score).to eq(0)
   end
 
   describe "Rolling a Ball" do
     it "changes the score" do
       subject.roll(4)
-      expect(subject.score).to eq(4)
+      expect(subject.calculate_total_score).to eq(4)
     end
   end
 
@@ -17,7 +17,7 @@ describe Game do
     it "adds two scores" do
       subject.roll(4)
       subject.roll(3)
-      expect(subject.score).to eq(7)
+      expect(subject.calculate_total_score).to eq(7)
     end
   end
 
@@ -26,7 +26,7 @@ describe Game do
       subject.roll(4)
       subject.roll(6)
       subject.roll(3)
-      expect(subject.score).to eq(16)
+      expect(subject.calculate_total_score).to eq(16)
     end
   end
 
