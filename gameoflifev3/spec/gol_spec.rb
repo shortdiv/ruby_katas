@@ -32,5 +32,5 @@ describe Game do
      #  [DEAD,DEAD],
      #  [DEAD,DEAD]
      # ]
-      end
-    end
+  end
+end

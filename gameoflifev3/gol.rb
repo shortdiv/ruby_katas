@@ -14,3 +14,9 @@ class Cell
   end
 
 end
+
+class Game
+  def self.evolve(board)
+    board
+  end
+end
