@@ -5,5 +5,9 @@ describe Cell do
     expect(subject.isalive?).to eq(true)
   end
 
+  it 'knows number of alive neighbors' do
+    expect(subject.neighbors).to eq(0)
+  end
+
 
 end
