@@ -32,5 +32,15 @@ class Game
     end
     board
   end
-
 end
+
+class Underpopulate < Cell
+  def is_underpopulated?(isalive, neighbors)
+    isalive == true && neighbors < 2
+  end
+
+  def change_state
+    kill
+  end
+end
+

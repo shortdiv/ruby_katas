@@ -44,3 +44,16 @@ describe Game do
      # ]
   end
 end
+
+describe Underpopulate do
+  it 'checks whether cell is alive and if cell has less than 2 live neighbors and returns true if conditions are met' do
+    results = Underpopulate.new.is_underpopulated?(true, 1)
+    expect(results).to eq(true)
+  end
+
+  it 'kills a cell if underpopulate conditions are met' do
+    underpopulate = Underpopulate.new
+    underpopulate.change_state
+    expect(underpopulate.isalive?).to eq(false)
+  end
+end
