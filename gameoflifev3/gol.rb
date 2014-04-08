@@ -35,8 +35,18 @@ class Game
 end
 
 class Underpopulate < Cell
-  def is_underpopulated?(isalive, neighbors)
+  def is_condition_met?(isalive, neighbors)
     isalive == true && neighbors < 2
+  end
+
+  def change_state
+    kill
+  end
+end
+
+class Overpopulate < Cell
+  def is_condition_met?(isalive, neighbors)
+    isalive == true && neighbors > 3
   end
 
   def change_state

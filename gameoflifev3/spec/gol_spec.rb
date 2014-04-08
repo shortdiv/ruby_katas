@@ -47,7 +47,7 @@ end
 
 describe Underpopulate do
   it 'checks whether cell is alive and if cell has less than 2 live neighbors and returns true if conditions are met' do
-    results = Underpopulate.new.is_underpopulated?(true, 1)
+    results = Underpopulate.new.is_condition_met?(true, 1)
     expect(results).to eq(true)
   end
 
@@ -55,5 +55,18 @@ describe Underpopulate do
     underpopulate = Underpopulate.new
     underpopulate.change_state
     expect(underpopulate.isalive?).to eq(false)
+  end
+end
+
+describe Overpopulate do
+  it 'checks whether cell is alive and has more than 3 live neighbors and returns true if conditions are met' do
+    results = Overpopulate.new.is_condition_met?(true, 4)
+    expect(results).to eq(true)
+  end
+
+  it 'kills a cell if overpopulate conditions are met' do
+    overpopulate = Overpopulate.new
+    overpopulate.change_state
+    expect(overpopulate.isalive?).to eq(false)
   end
 end
