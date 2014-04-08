@@ -14,6 +14,10 @@ describe Cell do
     expect(subject.isalive?).to eq(false)
   end
 
+  it 'resurrects a cell' do
+    subject.resurrect
+    expect(subject.isalive?).to eq(true)
+  end
 
 end
 

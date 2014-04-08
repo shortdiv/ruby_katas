@@ -17,10 +17,20 @@ class Cell
     @isalive = false
   end
 
+  def resurrect
+    @isalive = true
+  end
+
 end
 
 class Game
   def self.evolve(board)
+    board.each do |cell|
+      if cell.isalive? && cell.neighbors == 0
+        cell.kill
+      end
+    end
     board
   end
+
 end
