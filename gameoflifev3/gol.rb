@@ -21,6 +21,10 @@ class Cell
     @isalive = true
   end
 
+  def keepalive
+    @isalive = true
+  end
+
 end
 
 class Game
@@ -54,3 +58,22 @@ class Overpopulate < Cell
   end
 end
 
+class LiveOn < Cell
+  def is_condition_met?(isalive, neighbors)
+    isalive == true && (neighbors == 2 || neighbors == 3)
+  end
+
+  def change_state
+    keepalive
+  end
+end
+
+class Resurrect < Cell
+  def is_condition_met?(isalive, neighbors)
+    isalive == false && neighbors == 3
+  end
+
+  def change_state
+    resurrect
+  end
+end

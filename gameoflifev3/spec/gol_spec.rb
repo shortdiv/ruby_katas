@@ -70,3 +70,29 @@ describe Overpopulate do
     expect(overpopulate.isalive?).to eq(false)
   end
 end
+
+describe LiveOn do
+  it 'checks whether a cell is alive and has exactly 2 or 3 live neighbors and returns true if conditions are met' do
+    results = LiveOn.new.is_condition_met?(true,2)
+    expect(results).to eq(true)
+  end
+
+  it 'keeps alive state of cell if LiveOn conditions are met' do
+    liveon = LiveOn.new
+    liveon.change_state
+    expect(liveon.isalive?).to eq(true)
+  end
+end
+
+describe Resurrect do
+  it 'checks whether the cell is dead and has exactly 3 live neighbors and returns true if conditions are met' do
+    results = Resurrect.new.is_condition_met?(false, 3)
+    expect(results).to eq(true)
+  end
+
+  it 'resurrects a cell if conditions for resurrection are met' do
+    resurrect = Resurrect.new
+    resurrect.change_state
+    expect(resurrect.isalive?).to eq(true)
+  end
+end
