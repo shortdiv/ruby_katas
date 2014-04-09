@@ -18,11 +18,9 @@ describe Game do
 
   describe "Rolling 2 balls" do
     it "adds two scores" do
-      pending
-      game = Game.new
-      game.roll(4)
-      game.roll(3)
-      expect(game.calculate_total_score).to eq(7)
+      subject.roll(4)
+      subject.roll(3)
+      expect(subject.calculate_total_score).to eq(7)
     end
   end
 
@@ -54,7 +52,7 @@ describe SpareFrame do
       spare.roll(6)
       spare.roll(4)
       spare.roll(3)
-      expect(spare.score).to eq(13)
+      expect(spare.score([[6,4],[3]])).to eq(13)
     end
   end
 end
@@ -75,7 +73,7 @@ describe StrikeFrame do
       subject.roll(0)
       subject.roll(3)
       subject.roll(2)
-      expect(subject.score).to eq(15)
+      expect(subject.score([[10,0],[3,2]])).to eq(15)
     end
   end
 end
@@ -85,14 +83,14 @@ describe OpenFrame do
     it 'is an open game' do
       subject.roll(4)
       subject.roll(3)
-      results = subject.type_of_frame?([4,3])
+      results = subject.type_of_frame?([[4,3]])
       expect(results).to eq(true)
     end
 
     it 'adds score for an open game' do
       subject.roll(4)
       subject.roll(3)
-      expect(subject.score).to eq(7)
+      expect(subject.score([[4,3]])).to eq(7)
     end
   end
 end

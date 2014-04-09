@@ -14,17 +14,17 @@ class Game
   end
 
   def calculate_total_score
-    strike = StrikeFrame.new
-    spare = SpareFrame.new
-    open = OpenFrame.new
-    game_types = [strike,spare,open]
-    game_types.each do |game|
-      if game.type_of_frame?(@frames)
-        game.score
+    # puts @rolls.inspect
+    openframe = OpenFrame.new
+    strikeframe = StrikeFrame.new
+    different_frames = [strikeframe, openframe]
+    different_frames.each do |frame|
+      if frame.type_of_frame?(@frames)
+        @score += frame.score(@frames)
       end
     end
+    @score
   end
-
 end
 
 class SpareFrame < Game
@@ -34,8 +34,8 @@ class SpareFrame < Game
   end
 
   #method should take in a game and be able to calculate score
-  def score
-    @score = 10 + @frames[1][0] #10 plus next no. of pins in next throw
+  def score(frames)
+    @score = 10 + frames[1][0] #10 plus next no. of pins in next throw
   end
 
 end
@@ -45,8 +45,8 @@ class StrikeFrame < Game
     frames[0][0] == 10
   end
 
-  def score
-    @score = 10 + @frames[1][0] + @frames[1][1]
+  def score(frames)
+    @score = 10 + frames[1][0] + frames[1][1]
   end
 
 end
@@ -56,8 +56,7 @@ class OpenFrame < Game
     frames[0][0] + frames[0][1] < 10
   end
 
-  def score
-    @score = @frames[0][0] + @frames[0][1]
+  def score(frames)
+    @score = frames[0][0] + frames[0][1]
   end
 end
-
