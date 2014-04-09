@@ -17,7 +17,8 @@ class Game
     # puts @rolls.inspect
     openframe = OpenFrame.new
     strikeframe = StrikeFrame.new
-    different_frames = [strikeframe, openframe]
+    spareframe = SpareFrame.new
+    different_frames = [strikeframe, spareframe, openframe]
     different_frames.each do |frame|
       if frame.type_of_frame?(@frames)
         @score += frame.score(@frames)

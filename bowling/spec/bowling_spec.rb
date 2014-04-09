@@ -26,7 +26,6 @@ describe Game do
 
   describe "Rolled 3 times, the second time is a spare" do
     it "adds the bonus spare into score" do
-      pending
       subject.roll(4)
       subject.roll(6)
       subject.roll(3)
