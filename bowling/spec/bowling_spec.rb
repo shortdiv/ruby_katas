@@ -42,7 +42,7 @@ describe SpareFrame do
       spare.roll(6)
       spare.roll(4)
       spare.roll(3)
-      results = spare.type_of_frame?([[6,4],[3]])
+      results = spare.type_of_frame?([6,4])
       expect(results).to eq(true)
     end
 
@@ -51,7 +51,8 @@ describe SpareFrame do
       spare.roll(6)
       spare.roll(4)
       spare.roll(3)
-      expect(spare.score([[6,4],[3]])).to eq(13)
+      spare.roll(2)
+      expect(spare.score([[6,4],[3,2]])).to eq(13)
     end
   end
 end
@@ -82,7 +83,7 @@ describe OpenFrame do
     it 'is an open game' do
       subject.roll(4)
       subject.roll(3)
-      results = subject.type_of_frame?([[4,3]])
+      results = subject.type_of_frame?([4,3])
       expect(results).to eq(true)
     end
 

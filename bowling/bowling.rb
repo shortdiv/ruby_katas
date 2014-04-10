@@ -15,13 +15,15 @@ class Game
 
   def calculate_total_score
     # puts @rolls.inspect
-    openframe = OpenFrame.new
     strikeframe = StrikeFrame.new
     spareframe = SpareFrame.new
-    different_frames = [strikeframe, spareframe, openframe]
-    different_frames.each do |frame|
-      if frame.type_of_frame?(@frames)
-        @score += frame.score(@frames)
+    openframe = OpenFrame.new
+    different_frame_types = [strikeframe, spareframe, openframe]
+    @frames.each do |single_frame|
+      different_frame_types.each do |frame_style|
+        if frame_style.type_of_frame?(single_frame)
+          @score += frame_style.score(single_frame)
+        end
       end
     end
     @score
@@ -31,10 +33,10 @@ end
 class SpareFrame < Game
 
   def type_of_frame?(frames)
-    frames[0][0] + frames[0][1] == 10
+    frames[0] + frames[1] == 10
   end
 
-  #method should take in a game and be able to calculate score
+  #method should take multidimensional array and be able to add next score
   def score(frames)
     @score = 10 + frames[1][0] #10 plus next no. of pins in next throw
   end
@@ -54,7 +56,7 @@ end
 
 class OpenFrame < Game
   def type_of_frame?(frames)
-    frames[0][0] + frames[0][1] < 10
+    frames[0] + frames[1] < 10
   end
 
   def score(frames)
