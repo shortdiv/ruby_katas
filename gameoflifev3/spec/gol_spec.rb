@@ -22,12 +22,13 @@ describe Cell do
 end
 
 describe Game do
-  it 'evolve the board according to the rules of the game' do
-    board_before = []
-    board_before.push Cell.new(true, 0)
-    board_before.push Cell.new(false, 1)
-    board_before.push Cell.new(false, 1)
-    board_before.push Cell.new(false, 1)
+  context 'evolve the board according to the rules of the game' do
+    it 'should return all dead' do
+     board_before = []
+     board_before.push Cell.new(true, 0)
+     board_before.push Cell.new(false, 1)
+     board_before.push Cell.new(false, 1)
+     board_before.push Cell.new(false, 1)
     # [
     #  [ALIVE, DEAD],
     #  [DEAD, DEAD]
@@ -42,6 +43,35 @@ describe Game do
      #  [DEAD,DEAD],
      #  [DEAD,DEAD]
      # ]
+    end
+  end
+
+  context 'evolves the board that has 3 dead cells' do
+    it 'should return middle 3 live cells' do
+    board_before = []
+    board_before.push Cell.new(false,2)
+    board_before.push Cell.new(true,1)
+    board_before.push Cell.new(false,2)
+    board_before.push Cell.new(false,3)
+    board_before.push Cell.new(true,2)
+    board_before.push Cell.new(false,3)
+    board_before.push Cell.new(false,2)
+    board_before.push Cell.new(true,1)
+    board_before.push Cell.new(false,2)
+    #   [
+    #   [DEAD, ALIVE, DEAD],
+    #   [DEAD, ALIVE, DEAD],
+    #   [DEAD, ALIVE, DEAD]
+    # ]
+
+    board_after = Game.evolve(board_before)
+
+    board = []
+    board_after.each do |cell|
+      board << cell.isalive?
+    end
+    expect(board).to eq([false, false, false, true, true, true, false, false, false])
+    end
   end
 end
 
