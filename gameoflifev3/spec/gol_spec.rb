@@ -33,7 +33,7 @@ describe Game do
     #  [DEAD, DEAD]
     # ]
 
-    board_after = Game.evolve board_before
+    board_after = Game.evolve(board_before)
 
     board_after.each do |cell|
       expect(cell.isalive?).to eq(false)
@@ -47,52 +47,52 @@ end
 
 describe Underpopulate do
   it 'checks whether cell is alive and if cell has less than 2 live neighbors and returns true if conditions are met' do
-    results = Underpopulate.new.is_condition_met?(true, 1)
+    results = Underpopulate.new.is_condition_met?(Cell.new(true, 0))
     expect(results).to eq(true)
   end
 
   it 'kills a cell if underpopulate conditions are met' do
-    underpopulate = Underpopulate.new
-    underpopulate.change_state
-    expect(underpopulate.isalive?).to eq(false)
+    cell = Cell.new(true,0)
+    Underpopulate.new.change_state(cell)
+    expect(cell.isalive?).to eq(false)
   end
 end
 
 describe Overpopulate do
   it 'checks whether cell is alive and has more than 3 live neighbors and returns true if conditions are met' do
-    results = Overpopulate.new.is_condition_met?(true, 4)
+    results = Overpopulate.new.is_condition_met?(Cell.new(true,4))
     expect(results).to eq(true)
   end
 
   it 'kills a cell if overpopulate conditions are met' do
-    overpopulate = Overpopulate.new
-    overpopulate.change_state
-    expect(overpopulate.isalive?).to eq(false)
+    cell = Cell.new(true, 4)
+    Overpopulate.new.change_state(cell)
+    expect(cell.isalive?).to eq(false)
   end
 end
 
 describe LiveOn do
   it 'checks whether a cell is alive and has exactly 2 or 3 live neighbors and returns true if conditions are met' do
-    results = LiveOn.new.is_condition_met?(true,2)
+    results = LiveOn.new.is_condition_met?(Cell.new(true,2))
     expect(results).to eq(true)
   end
 
   it 'keeps alive state of cell if LiveOn conditions are met' do
-    liveon = LiveOn.new
-    liveon.change_state
-    expect(liveon.isalive?).to eq(true)
+    cell = Cell.new(true, 2)
+    LiveOn.new.change_state(cell)
+    expect(cell.isalive?).to eq(true)
   end
 end
 
 describe Resurrect do
   it 'checks whether the cell is dead and has exactly 3 live neighbors and returns true if conditions are met' do
-    results = Resurrect.new.is_condition_met?(false, 3)
+    results = Resurrect.new.is_condition_met?(Cell.new(false, 3))
     expect(results).to eq(true)
   end
 
   it 'resurrects a cell if conditions for resurrection are met' do
-    resurrect = Resurrect.new
-    resurrect.change_state
-    expect(resurrect.isalive?).to eq(true)
+    cell = Cell.new(false,3)
+    Resurrect.new.change_state(cell)
+    expect(cell.isalive?).to eq(true)
   end
 end

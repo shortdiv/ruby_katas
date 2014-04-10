@@ -29,51 +29,56 @@ end
 
 class Game
   def self.evolve(board)
-    board.each do |cell|
-      if cell.isalive? && cell.neighbors == 0
-        cell.kill
+    underpopulate = Underpopulate.new
+    overpopulate = Overpopulate.new
+    liveon = LiveOn.new
+    resurrect = Resurrect.new
+    # moves = [underpopulate, overpopulate, liveon, resurrect]
+      board.each do |cell|
+        if underpopulate.is_condition_met?(cell)
+          underpopulate.change_state cell
+        end
       end
-    end
     board
   end
 end
 
-class Underpopulate < Cell
-  def is_condition_met?(isalive, neighbors)
-    isalive == true && neighbors < 2
+class Underpopulate
+  def is_condition_met?(cell)
+    cell.isalive? == true && cell.neighbors < 2
   end
 
-  def change_state
-    kill
-  end
-end
-
-class Overpopulate < Cell
-  def is_condition_met?(isalive, neighbors)
-    isalive == true && neighbors > 3
-  end
-
-  def change_state
-    kill
+  def change_state(cell)
+    cell.kill
   end
 end
 
-class LiveOn < Cell
-  def is_condition_met?(isalive, neighbors)
-    isalive == true && (neighbors == 2 || neighbors == 3)
+class Overpopulate
+  def is_condition_met?(cell)
+    cell.isalive? == true && cell.neighbors > 3
   end
 
-  def change_state
-    keepalive
+  def change_state(cell)
+    cell.kill
   end
 end
 
-class Resurrect < Cell
-  def is_condition_met?(isalive, neighbors)
-    isalive == false && neighbors == 3
+class LiveOn
+  def is_condition_met?(cell)
+    cell.isalive? == true && (cell.neighbors == 2 || cell.neighbors == 3)
   end
 
-  def change_state
-    resurrect
+  def change_state(cell)
+    cell.keepalive
+  end
+end
+
+class Resurrect
+  def is_condition_met?(cell)
+    cell.isalive? == false && cell.neighbors == 3
+  end
+
+  def change_state(cell)
+    cell.resurrect
   end
 end
