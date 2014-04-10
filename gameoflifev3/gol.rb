@@ -33,11 +33,13 @@ class Game
     overpopulate = Overpopulate.new
     liveon = LiveOn.new
     resurrect = Resurrect.new
-    # moves = [underpopulate, overpopulate, liveon, resurrect]
+    moves = [underpopulate, overpopulate, liveon, resurrect]
       board.each do |cell|
-        if underpopulate.is_condition_met?(cell)
-          underpopulate.change_state cell
+        moves.each do |move|
+        if move.is_condition_met?(cell)
+          move.change_state(cell)
         end
+      end
       end
     board
   end
