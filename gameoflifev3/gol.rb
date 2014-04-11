@@ -29,19 +29,23 @@ end
 
 class Game
   def self.evolve(board)
+    board.each do |cell|
+      move_to_do = moves.select {|move| move.is_condition_met?(cell)}.first
+      if move_to_do != nil
+        move_to_do.change_state(cell)
+      else
+        cell
+      end
+      board
+    end
+  end
+
+  def self.moves
     underpopulate = Underpopulate.new
     overpopulate = Overpopulate.new
     liveon = LiveOn.new
     resurrect = Resurrect.new
-    moves = [underpopulate, overpopulate, liveon, resurrect]
-      board.each do |cell|
-        moves.each do |move|
-        if move.is_condition_met?(cell)
-          move.change_state(cell)
-        end
-      end
-      end
-    board
+    [underpopulate, overpopulate, liveon, resurrect]
   end
 end
 
