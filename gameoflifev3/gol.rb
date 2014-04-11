@@ -31,13 +31,9 @@ class Game
   def self.evolve(board)
     board.each do |cell|
       move_to_do = moves.select {|move| move.is_condition_met?(cell)}.first
-      if move_to_do != nil
-        move_to_do.change_state(cell)
-      else
-        cell
-      end
-      board
+      move_to_do.change_state(cell)
     end
+    board
   end
 
   def self.moves
@@ -45,7 +41,8 @@ class Game
     overpopulate = Overpopulate.new
     liveon = LiveOn.new
     resurrect = Resurrect.new
-    [underpopulate, overpopulate, liveon, resurrect]
+    noapplicablerule = NoApplicableRule.new
+    [underpopulate, overpopulate, liveon, resurrect, noapplicablerule]
   end
 end
 
@@ -86,5 +83,16 @@ class Resurrect
 
   def change_state(cell)
     cell.resurrect
+  end
+end
+
+
+class NoApplicableRule
+  def is_condition_met?(cell)
+    true
+  end
+
+  def change_state(cell)
+    cell
   end
 end
