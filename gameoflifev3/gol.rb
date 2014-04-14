@@ -1,8 +1,9 @@
 class Cell
 
-  def initialize(isalive = true,neighbors = 0)
+  def initialize(isalive = true,neighbors = 0,x,y)
     @isalive = isalive
     @neighbors = neighbors
+    @x,@y = x, y
   end
 
   def isalive?
@@ -28,11 +29,13 @@ class Cell
 end
 
 class Game
+
   def self.evolve(board)
     board.each do |cell|
       move_to_do = moves.select {|move| move.is_condition_met?(cell)}.first
       move_to_do.change_state(cell)
     end
+    puts board.inspect
     board
   end
 
@@ -44,6 +47,29 @@ class Game
     noapplicablerule = NoApplicableRule.new
     [underpopulate, overpopulate, liveon, resurrect, noapplicablerule]
   end
+
+  def self.print_board(board)
+    truths = 0
+    board.each do |cell|
+      if cell.isalive?
+        truths += 1
+      end
+    end
+  end
+
+  #method to arrange cells in one straight line with same y value
+  def self.oneline_coordinates(board)
+    coord = []
+    x_pos = 0
+    board.each do |cell|
+      coord.push(x:x_pos,y:0)
+      x_pos += 1
+    end
+    coord
+  end
+
+  #method to iterate array and figure out coordinates of surrounding cells
+
 end
 
 class Underpopulate
