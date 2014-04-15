@@ -1,9 +1,11 @@
 class Cell
+  attr_accessor :x, :y
 
   def initialize(isalive = true,neighbors = 0,x,y)
     @isalive = isalive
     @neighbors = neighbors
-    @x,@y = x, y
+    self.x = x
+    self.y = y
   end
 
   def isalive?
@@ -56,19 +58,6 @@ class Game
       end
     end
   end
-
-  #method to arrange cells in one straight line with same y value
-  def self.oneline_coordinates(board)
-    coord = []
-    x_pos = 0
-    board.each do |cell|
-      coord.push(x:x_pos,y:0)
-      x_pos += 1
-    end
-    coord
-  end
-
-  #method to iterate array and figure out coordinates of surrounding cells
 
 end
 

@@ -10,6 +10,11 @@ describe Cell do
     expect(cell.neighbors).to eq(0)
   end
 
+  it 'knows the coordinates of an individual cell' do
+    expect(cell.x).to eq(0)
+    expect(cell.y).to eq(0)
+  end
+
   it 'kills a cell' do
     cell.kill
     expect(cell.isalive?).to eq(false)
@@ -47,23 +52,6 @@ describe Game do
     end
   end
 
-  context 'when asked for coordinates of the board' do
-    it 'provides array coordinates' do
-      board = []
-      board.push Cell.new(true,0, 0, 0)
-      board.push Cell.new(false,1, 1, 0)
-      board.push Cell.new(false,1, 0, 1)
-      board.push Cell.new(false,1, 1, 1)
-
-      coord = Game.oneline_coordinates(board)
-      expect(coord).to eq([
-        {:x=>0, :y=>0},
-        {:x=>1, :y=>0},
-        {:x=>2, :y=>0},
-        {:x=>3, :y=>0}
-        ])
-    end
-  end
 
   context 'evolves the board that has 3 dead cells' do
     it 'should return middle 3 live cells' do
