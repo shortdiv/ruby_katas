@@ -52,6 +52,23 @@ describe Game do
     end
   end
 
+  # context 'print the board' do
+  #   it 'will return the cells before and after evolve' do
+  #   board_before = []
+  #   board_before.push Cell.new(true, 0, 0, 0)
+  #   board_before.push Cell.new(false, 1, 1, 0)
+  #   board_before.push Cell.new(false, 1, 0, 1)
+  #   board_before.push Cell.new(false, 1, 1, 1)
+
+  #   print_board_before = Game.print_board(board_before)
+
+  #   expect print_board_before. to eq([
+  #     [true,]
+  #   ])
+
+  #   end
+  # end
+
 
   context 'evolves the board that has 3 dead cells' do
     it 'should return middle 3 live cells' do

@@ -33,12 +33,12 @@ end
 class Game
 
   def self.evolve(board)
-    puts print_board(board)
+    print print_board(board)
     board.each do |cell|
       move_to_do = moves.select {|move| move.is_condition_met?(cell)}.first
       move_to_do.change_state(cell)
     end
-    puts print_board(board)
+    print print_board(board)
     board
   end
 
@@ -52,14 +52,17 @@ class Game
   end
 
   def self.print_board(board)
-    cells = []
-    board.each do |cell|
-      one_cell = []
-      one_cell.push cell.isalive?, cell.neighbors
-      cells << one_cell
+    board_game = []
+    board.select do |cell|
+      if cell.y == 0
+        board_game.push cell.isalive?, cell.neighbors
+      elsif cell.y == 1
+        board_game.push cell.isalive?, cell.neighbors
+      elsif cell.y == 2
+        board_game.push cell.isalive?, cell.neighbors
+      end
     end
-    print cells
-    return cells
+    board_game
   end
 
 end
