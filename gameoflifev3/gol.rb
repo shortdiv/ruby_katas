@@ -30,15 +30,14 @@ class Cell
 
 end
 
+
 class Game
 
   def self.evolve(board)
-    print print_board(board)
     board.each do |cell|
       move_to_do = moves.select {|move| move.is_condition_met?(cell)}.first
       move_to_do.change_state(cell)
     end
-    print print_board(board)
     board
   end
 
@@ -51,18 +50,19 @@ class Game
     [underpopulate, overpopulate, liveon, resurrect, noapplicablerule]
   end
 
-  def self.print_board(board)
-    board_game = []
-    board.select do |cell|
-      if cell.y == 0
-        board_game.push cell.isalive?, cell.neighbors
-      elsif cell.y == 1
-        board_game.push cell.isalive?, cell.neighbors
-      elsif cell.y == 2
-        board_game.push cell.isalive?, cell.neighbors
+  # print entire board => print out cells linearly, only alive/dead
+end
+
+class SimpleListOfCellsToStandardOut
+
+  def self.print(board)
+    board.each do |cell|
+      if cell.isalive?
+        puts "is alive with #{cell.neighbors} neighbors"
+      else
+        puts "is dead with #{cell.neighbors} neighbors"
       end
     end
-    board_game
   end
 
 end
