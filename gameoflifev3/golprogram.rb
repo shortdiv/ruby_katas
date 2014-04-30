@@ -26,6 +26,7 @@ end
 # generate/make board
 
 # print board
+puts "initial board before evolves looks like:"
 SimpleListOfCellsToStandardOut.print ConwaysProgram.new.game_board
 
 # Ask how many times to evolve
@@ -33,20 +34,15 @@ puts "How many times would you like to evolve?"
 evolves_requested = gets.chomp.to_i
 
 # evolve board specified number of times
-evolves_so_far = 2
+evolves_so_far = 1
 game_board = Game.evolve ConwaysProgram.new.game_board #first evolve
-puts "board after 1 evolve"
+puts "board after #{evolves_so_far} evolves"
 SimpleListOfCellsToStandardOut.print game_board
 
-while evolves_so_far <= evolves_requested do
+while evolves_so_far < evolves_requested do
   game_board = Game.evolve game_board
+  evolves_so_far += 1
   puts ""
   puts "Board after #{evolves_so_far} evolves"
   SimpleListOfCellsToStandardOut.print game_board
-  evolves_so_far += 1
 end
-
-evolve_game = Game.evolve ConwaysProgram.new.game_board
-evolve_game2 = Game.evolve evolve_game
-
-
