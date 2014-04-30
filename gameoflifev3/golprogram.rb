@@ -9,11 +9,19 @@ class ConwaysProgram
     board.push Cell.new(false, 1, 0, 1)
     board.push Cell.new(false, 1, 1, 1)
     board
+    # board2 = []
+    # board2.push Cell.new(false, 2, 0, 0)
+    # board2.push Cell.new(true, 1, 1, 0)
+    # board2.push Cell.new(false, 2, 2, 0)
+    # board2.push Cell.new(false, 3, 0, 1)
+    # board2.push Cell.new(true, 2, 1, 1)
+    # board2.push Cell.new(false, 3, 2, 1)
+    # board2.push Cell.new(false, 2, 0, 2)
+    # board2.push Cell.new(true, 1, 1, 2)
+    # board2.push Cell.new(false, 2, 2, 2)
   end
 
-
 end
-
 
 # generate/make board
 
@@ -21,15 +29,24 @@ end
 SimpleListOfCellsToStandardOut.print ConwaysProgram.new.game_board
 
 # Ask how many times to evolve
+puts "How many times would you like to evolve?"
+evolves_requested = gets.chomp.to_i
 
 # evolve board specified number of times
-evolved_game1 = Game.evolve ConwaysProgram.new.game_board
-evolved_game2 = Game.evolve evolved_game1
+evolves_so_far = 2
+game_board = Game.evolve ConwaysProgram.new.game_board #first evolve
+puts "board after 1 evolve"
+SimpleListOfCellsToStandardOut.print game_board
 
-# print evolved board for each evolution
-puts ""
-puts "Board after 1 evolution looks like this!!!"
-SimpleListOfCellsToStandardOut.print evolved_game1
-puts ""
-puts "Board of 2nd evolution looks like this!!!"
-SimpleListOfCellsToStandardOut.print evolved_game2
+while evolves_so_far <= evolves_requested do
+  game_board = Game.evolve game_board
+  puts ""
+  puts "Board after #{evolves_so_far} evolves"
+  SimpleListOfCellsToStandardOut.print game_board
+  evolves_so_far += 1
+end
+
+evolve_game = Game.evolve ConwaysProgram.new.game_board
+evolve_game2 = Game.evolve evolve_game
+
+
