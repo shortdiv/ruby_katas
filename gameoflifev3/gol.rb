@@ -116,12 +116,45 @@ end
 # resurrect used by resurrect class
 # keepalive used by keepalive class
 
+class CalculateNeighbors
+
+  def self.calculate_board_limits(board)
+    x = []
+    y = []
+    board.each do |cell|
+      x << cell.x
+      y << cell.y
+    end
+    @x_and_y_limits_of_board = [x.max, y.max] #returns nil atm
+    return @x_and_y_limits_of_board #returns array of x max and y max
+  end
+
+  def self.neighbor(cell)
+    neighbors = 0
+    x = cell.x
+    y = cell.y
+    for y_pos in y-1..y+1
+      for x_pos in x-1..x+1
+        if (0...@x_and_y_limits_of_board[0]).include?(x_pos) && (0...@x_and_y_limits_of_board[1]).include?(y_pos)
+          if cell.isalive? == true
+            neighbors += 1
+          end
+        end
+      end
+    end
+    if cell.isalive? == true
+      neighbors -= 1
+    end
+  end
+
+end
 
 class Game
 
   def self.evolve(board)
     board.each do |cell|
-      move_to_do = moves.select {|move| move.is_condition_met?(cell)}.first
+      neighbors = CalculateNeighbors.neighbor(cell)
+      move_to_do = moves.select {|move| move.is_condition_met?(cell, neighbors)}.first
       move_to_do.change_state(cell)
     end
     board
@@ -153,9 +186,10 @@ class SimpleListOfCellsToStandardOut
 
 end
 
+
 class Underpopulate
-  def is_condition_met?(cell)
-    cell.isalive? == true && cell.neighbors < 2
+  def is_condition_met?(cell, neighbors)
+    cell.isalive? == true && neighbors < 2
   end
 
   def change_state(cell)
@@ -164,8 +198,8 @@ class Underpopulate
 end
 
 class Overpopulate
-  def is_condition_met?(cell)
-    cell.isalive? == true && cell.neighbors > 3
+  def is_condition_met?(cell, neighbors)
+    cell.isalive? == true && neighbors > 3
   end
 
   def change_state(cell)
@@ -174,8 +208,8 @@ class Overpopulate
 end
 
 class LiveOn
-  def is_condition_met?(cell)
-    cell.isalive? == true && (cell.neighbors == 2 || cell.neighbors == 3)
+  def is_condition_met?(cell, neighbors)
+    cell.isalive? == true && (neighbors == 2 || neighbors == 3)
   end
 
   def change_state(cell)
@@ -184,8 +218,8 @@ class LiveOn
 end
 
 class Resurrect
-  def is_condition_met?(cell)
-    cell.isalive? == false && cell.neighbors == 3
+  def is_condition_met?(cell, neighbors)
+    cell.isalive? == false && neighbors == 3
   end
 
   def change_state(cell)
