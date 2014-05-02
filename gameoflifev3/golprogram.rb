@@ -30,14 +30,22 @@ class ConwaysProgram
     board2.push ThreeDimensionalCell.new(false, 1, 1, 1, 0)
   end
 
+  def weird_game_board
+    board2 = []
+    board2.push ThreeDimensionalCell.new(true, 0, 0, "v", "c")
+    board2.push ThreeDimensionalCell.new(false, 1, 1, "c", "v")
+    board2.push ThreeDimensionalCell.new(false, 1, 0, "a", "d")
+    board2.push ThreeDimensionalCell.new(false, 1, 1, "y", "x")
+  end
+
 end
 
 # generate/make single dimensional board
 
 # print board
-game_board = ConwaysProgram.new.threed_game_board
+game_board = ConwaysProgram.new.weird_game_board
 
-game_board = ThreeDBoardNeighborCalculator.new.calculate game_board
+# game_board = ThreeDBoardNeighborCalculator.new.calculate game_board
 puts "initial board before evolves looks like:"
 SimpleListOfCellsToStandardOut.print game_board
 

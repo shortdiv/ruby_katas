@@ -72,6 +72,41 @@ class TwoDimensionalCell
 
 end
 
+class WeirdDimensionalCell
+  attr_accessor :a, :b
+
+  def initialize(isalive = true,neighbors = 0,a,b)
+    @isalive = isalive
+    @neighbors = neighbors
+    self.a = a
+    self.b = b
+  end
+
+  def isalive?
+    @isalive
+  end
+
+  def neighbors
+    @neighbors
+  end
+
+  def kill
+    @isalive = false
+  end
+
+  def resurrect
+    @isalive = true
+  end
+
+  def keepalive
+    @isalive = true
+  end
+
+  def to_s
+    "#{a}, #{b}"
+  end
+end
+
 #** printer contract (Printable)
 # isalive? used by the print method and evolve/move methods which use all rule methods
 # neighbors used by the print method and all rule methods which are linked to evolve/move methods
