@@ -1,4 +1,42 @@
-class Cell
+
+class ThreeDimensionalCell
+  attr_accessor :x, :y, :z
+
+  def initialize(isalive = true,neighbors = 0,x,y,z)
+    @isalive = isalive
+    @neighbors = neighbors
+    self.x = x
+    self.y = y
+    self.z = z
+  end
+
+  def isalive?
+    @isalive
+  end
+
+  def neighbors
+    @neighbors
+  end
+
+  def kill
+    @isalive = false
+  end
+
+  def resurrect
+    @isalive = true
+  end
+
+  def keepalive
+    @isalive = true
+  end
+
+  def to_s
+    "#{x}, #{y}, #{z}"
+  end
+
+end
+
+class TwoDimensionalCell
   attr_accessor :x, :y
 
   def initialize(isalive = true,neighbors = 0,x,y)
@@ -28,7 +66,20 @@ class Cell
     @isalive = true
   end
 
+  def to_s
+    "#{x}, #{y}"
+  end
+
 end
+
+#** printer contract (Printable)
+# isalive? used by the print method and evolve/move methods which use all rule methods
+# neighbors used by the print method and all rule methods which are linked to evolve/move methods
+
+#**rule contract (Ruleable)
+# kill used by underpopulate and overpopulate class
+# resurrect used by resurrect class
+# keepalive used by keepalive class
 
 
 class Game
@@ -58,9 +109,9 @@ class SimpleListOfCellsToStandardOut
   def self.print(board)
     board.each do |cell|
       if cell.isalive?
-        puts "is alive with #{cell.neighbors} neighbors"
+        puts "cell of position #{cell.to_s} is alive with #{cell.neighbors} neighbors"
       else
-        puts "is dead with #{cell.neighbors} neighbors"
+        puts "cell of position #{cell.to_s} is dead with #{cell.neighbors} neighbors"
       end
     end
   end
